@@ -349,8 +349,7 @@ plugins:
  social:
    name:                <firstname> <lastname>
    links:
-#     - https://twitter.com/<username>
-     - https://github.com/Danielledaeun
+     - https://github.com/danielledaeun
 
 
 # Plugin Configs
