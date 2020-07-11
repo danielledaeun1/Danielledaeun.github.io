@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Pattern Mixture Model
+title: LASSO
 categories: stat
 description: >
-  Missing value imputation in clinical trials using Generalised Linear Mixed Model(GLMM). 
+  ESL.. 
   
 sitemap: false
 ---
-7월 15일 이전까지 정리해서 파일 송부하고 저장하기~
+8월
