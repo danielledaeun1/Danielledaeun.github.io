@@ -1,8 +1,9 @@
 ---
 layout: post
-title: Survival Content
+title: Survival Analysis basics
+categories: [projects, p1]
 description: >
-  Survival analysis - IPF
+  Survival analysis
 sitemap: false
 ---
 
