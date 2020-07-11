@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Survival Analysis basics
-categories: [projects, p1]
+title: Cross validation
+categories: [projects, p2]
 description: >
-  Survival analysis
+  Tree models and Cross validation
 sitemap: false
 ---
 
