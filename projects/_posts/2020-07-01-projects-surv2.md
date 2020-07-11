@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Survival Analysis basics
+title: Survival Analysis Models
 categories: [projects, p1]
 description: >
-  Survival analysis
+  Survival analysis models (time varying, multiplicative)
 sitemap: false
 ---
 
