@@ -1,1 +1,8 @@
-url 붙이는 법 제대로 확인하기
+# Danielle's blog
+
+*projects*
+: contains codes(hopefully) and flow of projects during my masters
+
+
+*stat*
+: contains concepts and notes on what I've learnt in Gradschool
