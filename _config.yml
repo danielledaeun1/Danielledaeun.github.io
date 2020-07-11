@@ -54,7 +54,7 @@ menu:
 #    url:               /about/
   - title:             Projects
     url:               /projects/
- - title:             Stat
+  - title:             Stat
     url:               /stat/
 
 # Add links to the footer.
