@@ -10,7 +10,7 @@ slug: stat
 
 # (Optional) Write a short (~150 characters) description of this featured tag.
 description: >
-  Notes on Stat.
+  Notes on Stat: gists on several tools and concepts that I'd fancy to revisit.
   
 # (Optional) You can disable grouping posts by date.
 # no_groups: true
