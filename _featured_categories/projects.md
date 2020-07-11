@@ -10,7 +10,7 @@ slug: projects
 
 # (Optional) Write a short (~150 characters) description of this featured tag.
 description: >
-  Projects during my Masters.
+  Data anaylsis projects during my Masters :)
   
 # (Optional) You can disable grouping posts by date.
 # no_groups: true
