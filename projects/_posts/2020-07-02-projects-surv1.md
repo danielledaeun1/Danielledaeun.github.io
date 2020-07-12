@@ -33,7 +33,6 @@ Indeed, all you have to know is what the *hazard* is for the rest of the discour
 Our random variable $$T_i$$ is the time to event that observe, which can be both continuous and discrete. It is obviously non-negative and its distribution is defined as below. ($$t$$ is a certain time point)$$$F(t) = P(T_i<t) = \ \int_0^tf(s)ds$$$ $$F(t)$$ is continous and differentiable (the $$T_i$$ is continous for now). Even if it's not, there is also a way to find $$f(t) = F'(t) = dF(t)/dt$$ anyway (*Stieltjes integration*). 
 
 $$f(t)=lim_{dt \rightarrow 0}\frac{1}{dt}P(t\leq T_i < t+dt)$$
-
 $$f(t)$$ is the limiting quantity that describes the likelihood of $$T_i$$ to fall in the very short interval after time $$t$$. To simply put, it is *the probability of event happens almost right after time t* 
 
 ### Survival Function $$S(t)$$
@@ -53,9 +52,7 @@ It is a **limiting conditional rate**  that that measures the rate of failure in
 The hazard function has several different names : Hazard rate, Conditional failure rate, the intensity rate. Why ***rate***? You may think it looks like a density function, however, the hazard rate is never a probability if the $T_i$ is *continuous*; as it is a probability divided by $dt$ + it could be >1. (elaboration is needed Kangki!!) However, if the $$T_i$$ is discrete, it is a probability.
 
 Cumulative hazard $$\Lambda(t)$$ is used for the convenience. As the hazard itself can not be monotonic as $$F(t)$$ or $$S(t)$$, calculating it directly can be very complicating. So we sum up!
-
 $$\Lambda(t)=\int_o^t \lambda(s)ds$$
-
 $$\Lambda(t)$$ measures the total amount of risk that has been accumulated up to time $$t$$.  
 
 I'd fancy give you a intuition on each functions, however, $$\Lambda(t)$$ is more like a tool for the sake of mathematical convenience. As you all recognised all functions ($$F(t), f(t), S(t), \lambda(t)$$) can be linked/expressed if you define only one of it. If you introduce $$\Lambda(t)$$ in that procedure, it will be much more convenient. 
