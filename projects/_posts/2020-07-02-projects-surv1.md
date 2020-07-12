@@ -57,6 +57,4 @@ IF the data is count data, $\Lambda(t)$ gives a expected  the number of failure 
 If you get the above concepts, you can move on to calculate those probabilities/rates now. Kaplan-Meier estimator is a famous nonparametric estimator in Survival Analysis
 
 ## Getting started
-* [Install]{:.heading.flip-title} --- tt.
-
-[install]({% link projects/_posts/2020-07-01-projects-surv2.md %})
+[install]({% link projects/_posts/README.md %})
