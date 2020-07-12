@@ -58,5 +58,5 @@ If you get the above concepts, you can move on to calculate those probabilities/
 
 ## Getting started
 * [Install]{:.heading.flip-title} --- How to install and run Hydejack.
-{:.related-posts.faded}
-[install]: 2020-07-01-projects-surv2.md
+
+[install]({% link projects/_posts/2020-07-01-projects-surv2.md %})
