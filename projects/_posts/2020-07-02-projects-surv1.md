@@ -38,20 +38,20 @@ $$f(t)$$ is the limiting quantity that describes the likelihood of $$T_i$$ to fa
 Then what should we know? We are interested in *how long the subject survives*. Therefore, we should look up the probability of the event happens longer than time $$t$$! 
 
 $$S(t)=P(T_i>t)=1-F(t)$$ 
-
-As the $$F(t)$$ is an increasing function from 0, $$S(t)$$ decreases from 1: that is the survival probability of subject $i$ falls over time. If $$S(\inf)=0$$ we say it is *proper* survival function. If somebody is cured it will never reach 0 even after forever.  
+As the $$F(t)$$ is an increasing function from 0, $$S(t)$$ decreases from 1: that is the survival probability of subject $$i$$ falls over time. If $$S(\inf)=0$$ we say it is *proper* survival function. If somebody is cured it will never reach 0 even after forever.  
 
 ### Hazard Function $$\lambda(t)$$
 Then you might want to see the *how dangerous a subject is* at each time: the RISK.  So you want to narrow the focus of failure time only for those who already survived, which leads ous to the hazard function!
 
 $$\lambda(t) = lim_{dt\rightarrow0^+}\frac{1}{dt}P(t\leq T_i < t+dt|T_i\geq t)=\frac{f(t)}{S(t)}$$
-
 It is a **limiting conditional rate**  that that measures the rate of failure in $$[t,t+dt)$$ when the failure has not occured at time $t$. It is **instantaneous** rate as the $$dt$$ is really short! 
 
 The hazard function has several different names : Hazard rate, Conditional failure rate, the intensity rate. Why ***rate***? You may think it looks like a density function, however, the hazard rate is never a probability if the $T_i$ is *continuous*; as it is a probability divided by $$dt$$ + it could be >1. (elaboration is needed Kangki!!) However, if the $$T_i$$ is discrete, it is a probability.
 
 **Cumulative hazard function** $$\Lambda(t)$$ is used for the convenience. As the hazard itself can not be monotonic as $$F(t)$$ or $$S(t)$$, calculating it directly can be very complicating. So we sum up!$$\Lambda(t)$$ measures the total amount of risk that has been accumulated up to time $$t$$. 
+
 $$\Lambda(t)=\int_o^t \lambda(s)ds$$
+
 I'd fancy give you a intuition on each functions, however, $$\Lambda(t)$$ is more like a tool for the sake of mathematical convenience. As you all recognised all functions ($$F(t), f(t), S(t), \lambda(t)$$) can be linked/expressed if you define only one of it. If you introduce $$\Lambda(t)$$ in that procedure, it will be much more convenient. 
 
 IF the data is count data, $$\Lambda(t)$$ gives a expected the number of failure times over a given period, if only the failure event were repeatable: the expected number of deaths of an individual up to time $$t$$ if the individual were to be resurrected after each death (without resetting time to zero). I'd leave a great comment that I can relate on this.
