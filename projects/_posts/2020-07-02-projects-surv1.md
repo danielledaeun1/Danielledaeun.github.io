@@ -29,7 +29,7 @@ Survival Analysis has been studied to find the proper way to estimate the failur
 # Hazard function
 Indeed, all you have to know is what the *hazard* is for the rest of the discourse. To get the idea of what it is, we should define the random variable and its $F(t)$ and the survival function $S(t)$ first.
 
-### random variable $T_i$ and  distribution $F(t)$
+### random variable $$T_i$$ and  distribution $$F(t)$$
 Our random variable $T_i$ is the time to event that observe, which can be both continuous and discrete. It is obviously non-negative and its distribution is defined as below. ($t$ is a certain time point)$$F(t) = P(T_i<t) = \ \int_0^tf(s)ds$$$F(t)$ is continous and differentiable (the $T_i$ is continous for now). Even if it's not, there is also a way to find $f(t) = F'(t) = dF(t)/dt$ anyway (*Stieltjes integration*). 
 $$f(t)=lim_{dt \rightarrow 0}\frac{1}{dt}P(t\leq T_i < t+dt)$$
 $f(t)$ is the limiting quantity that describes the likelihood of $T_i$ to fall in the very short interval after time $t$. To simply put, it is *the probability of event happens almost right after time t* 
