@@ -59,4 +59,4 @@ If you get the above concepts, you can move on to calculate those probabilities/
 ## Getting started
 * [Install]{:.heading.flip-title} --- How to install and run Hydejack.
 {:.related-posts.faded}
-[install]: README.md
+[install]: 2020-07-01-projects-surv2.md
