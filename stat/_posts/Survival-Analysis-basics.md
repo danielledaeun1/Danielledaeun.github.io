@@ -1,0 +1,96 @@
+---
+layout: post
+title: Survival Analysis basics
+categories: [stat]
+description: >
+  Basic concepts that you should know in Survival analysis. This posts will elaborate censoring, hazard function and nonparametric survival analysis(KM estimator) and the Cox PH model
+sitemap: false
+---
+
+When you are interested in the association of your variables and target(event) and particularly the duration(time to event), Survival analysis will be the first word that pops up in your head. As its name implies, you will be calculating the 'survival time' to the events no matter what your event is: it can be death(typically), exit from certain cluster, malfunction, etc.  You should not think of OLS, for the time to event does not follow normal distribution in the first place and OLS can not tackle the *censored* data well, which will definitely appear in your data set.
+
+In this post, several basic but essential concepts will be described. And then the nonparametric and parametric models especially, the most dominant model :Cox proportional hazards regression model will follow. (Ah, desclaimer! There will be no codes provided for this post. If you looking for one, please wait for it :) )
+
+
+# Time to event and Censoring
+
+First, the DISTRIBUTION of the *time to event(duration)*. In most times you will never know the exact distribution. If the **censoring** happens, which is the incomplete observation, there is no way for you to know the truth. And here the need for the Survival analysis arises. 
+
+**Censoring** means the incomplete observation of *failure time*(=event time). It can happen due to administrative reasons or simply because it is unavailable to observe. There are various sorts of censoring but for now, let's only visit the directions of censoring for the sake of simplicity. 
+
+* RIGHT censoring
+	Imagine you draw time flow in one direction (from past to future). Put the past on the left and the other on the right. Right censoring means the someone is censored on the right side, namely the future. That someone has been observed already however, even after some time passed if no event was observed for that person s/he is called 'right censored'. Simple examples would be to lost during the follow-up or to end the study with out any event experiences. Why is it right? s/he will eventually experience the event in the future(right side) but we cannot observe it for now. 
+* LEFT censoring
+	In some studies(mostly in the medical field), a certain break might be given between a registration and initiation of obersavation. If someone is censored during the period between those two, s/he is (left) censored as the censoring occurs even before the observation (on the left side)! 
+
+You might not overlook this **censoring** because there is no simple way to tackle it. If you ignore it and just treat censoring as the event you will *underestimate* the true mean time. (because the censored time is always on the left of the true event time) And also, deletion of censored data is a lost the information (which can be fatal in some cases). 
+
+Survival Analysis has been studied to find the proper way to estimate the failure time distribution even when the censoring happens!
+
+# Hazard function
+Indeed, all you have to know is what the *hazard* is in Survival Analysis. Let's begin with defining the random variable and its $F(t)$ and the survival function $S(t)$ first.
+
+### random variable $T_i$ and  distribution $F(t)$
+Our random variable $T_i$ is the time to event, which can be both continuous and discrete. It is obviously non-negative and its distribution is defined as below. ($t$ is a certain time point
+$$
+F(t) = P(T_i<t) =  \int_0^tf(s)ds
+$$
+$T_i$ is continous for now and $F(t)$ is continous and differentiable. Even if it's not, there is also a way to find $f(t) = F'(t) = dF(t)/dt$ anyway (*Stieltjes integration*). 
+$$
+f(t)=lim_{dt \rightarrow 0}\frac{1}{dt}P(t\leq T_i < t+dt)
+$$
+$f(t)$ is the limiting quantity that describes the likelihood of $T_i$ to fall in the very short interval after time $t$. To simply put, it is *the probability of event happens almost right after time t*. 
+
+### Survival Function $S(t)$
+Then what should we know? We are interested in *how long the subject survives*. Therefore, we should look up the probability of the event happens longer than time $t$! 
+$$
+S(t)=P(T_i>t)=1-F(t)
+$$
+$S(t)$ is the survival probability of subject $i$ falls over time. As the $F(t)$ is an increasing function from 0, $S(t)$ decreases from 1.  If $S(\inf)=0$ we say it is *proper* survival function. $S(t)$ will never reach 0 if somebody is cured and it's called the *improper* survival function.  
+
+### Hazard Function $\lambda(t)$
+Then you might want to see *how dangerous a subject is* at each time point: the RISK!  So you want to narrow the focus on only for those who already survived, which leads us to the hazard function!
+$$
+\lambda(t) = lim_{dt\rightarrow0^+}\frac{1}{dt}P(t\leq T_i < t+dt|T_i\geq t)=\frac{f(t)}{S(t)}
+$$
+It is a **limiting conditional rate** that measures the rate of failure in $[t,t+dt)$ given the failure has not occured at time $t$. To simply put, it is **instantaneous** rate (as the $dt$ is really short) of how risky the person is if s/he is survived at time t! 
+
+The hazard function has several different names : Hazard rate, Conditional failure rate, the intensity rate. Why ***rate***? You may think it looks like a density function, however, the hazard rate is never a probability if the $T_i$ is *continuous* : a) it is a probability divided by $dt$ and b) it could be >1. (elaboration is needed Kangki!!) However, if the $T_i$ is discrete, it is a probability.
+
+Cumulative hazard $\Lambda(t)$ is used for the convenience. As the hazard itself can not be monotonic as $F(t)$ and $S(t)$, calculating it directly can be very complicating. So we sum up!
+$$
+\Lambda(t)=\int_o^t \lambda(s)ds
+$$
+$\Lambda(t)$ measures the total amount of risk that has been accumulated up to time $t$.  
+
+IF the data is count data, $\Lambda(t)$ gives a expected  the number of failure times over a given period, if only the failure event were repeatable:  the expected number of deaths of an individual up to time $t$ if the individual were to be resurrected after each death (without resetting time to zero). I'd leave a great comment that I can relate on this
+
+> I would emphasize that the cumulative hazard function does not have a nice interpretation, and as such I would not try to use it as a way to interpret results; telling a non-statistical researcher that the cumulative hazards are different will most likely result in an "mm-hm" answer and then they'll never ask about the subject again, and not in a good way. 
+> [reference from stackexchange](https://stats.stackexchange.com/questions/60238/intuition-for-cumulative-hazard-function-survival-analysis)
+
+I'd fancy give you a intuition on each functions, however, $\Lambda(t)$ is more like a tool for the mathematical convenience. As you all recognised, all functions ($F(t), f(t), S(t), \lambda(t)$) are linked and each of them can be specified once you define one of it. 
+
+# Kaplan-Meier estimator (Product-limit estimator)
+
+If you get the concepts above, you can move on to the calculation. What do you do to estimate the probability? Nonparametrically, You count and make the rate! Kaplan-Meier estimator is a famous nonparametric estimator of survival function. 
+$$
+\hat{S(t)} = \prod_{i:t_i<t}(1-\frac{d_i}{n_i})
+$$
+$d_i$ is the number of individuals who died at time $t_i$ and $n_i$ is the number of total individuals known to have survived up to time $t_i$. $n_i$ is also called 'at risk'. 
+
+Once you define the estimator, you can test if some survival functions(typically two) are statistically same or not. The **log rank test** is used for the testing. 
+
+> more information on the test will be updated soon
+
+Also, you might get to see the Kaplan-Meier curves that look like steps in survival analysis. Those curves are plotted with this KM esimator. One thing you might be aware of the KM curves is that the curve is only showing the univariate variable comparison! It's is common to visualise the survival functions first and move on to the modeing with some insights. Also, if the curve crosses each other the Cox model will not be appropriate. 
+
+# Cox Proportional Hazard Model
+
+Finally you come to the very gist of this post! The Cox proportional hazard model (Cox regression) is the most popular model in the field. It's never too much to say it dominates the survival analysis. So, it is essential to understand the model.
+
+The very fundemenal concept of the model is that the hazard is constant over time and proportional. So if you have two groups to compare, their harzard for the event should stay constant: one should dominantly riskier than the other. 
+$$
+\lambda(t|X_i) = \lambda_0(t)exp(\beta X_i)
+$$
+ 
+
